@@ -28,7 +28,8 @@ const SignInScreen = ({navigation}) => {
     const { colors } = useTheme();
 
     const textInputChange = (val) => {
-        if( val.trim().length >= 4 ) {
+        const reg= /\S+@\S+/;
+        if( reg.test(val)=== true) {
             setData({
                 ...data,
                 email: val,
@@ -69,7 +70,7 @@ const SignInScreen = ({navigation}) => {
     }
 
     const handleValidUser = (val) => {
-        if( val.trim().length >= 4 ) {
+        if(reg.test(val)=== true) {
             setData({
                 ...data,
                 isValidUser: true
@@ -125,7 +126,7 @@ const SignInScreen = ({navigation}) => {
             </View>
             { data.isValidUser ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Email must be 4 characters long.</Text>
+            <Text style={styles.errorMsg}>Email must contain @</Text>
             </Animatable.View>
             }
             
