@@ -28,6 +28,7 @@ const SignInScreen = ({navigation}) => {
     const { colors } = useTheme();
 
     const textInputChange = (val) => {
+        
         const reg= /\S+@\S+/;
         if( reg.test(val)=== true) {
             setData({
