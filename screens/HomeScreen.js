@@ -7,6 +7,9 @@ import {
     StyleSheet, 
     TouchableHighlight,
     Button,
+    SafeAreaView,
+    Image,
+    TouchableOpacity,
     
 } from 'react-native';;
 const HomeScreen = ({navigation}) => {
@@ -25,9 +28,51 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.footer} >
         <Text style={styles.text_footer}>Categories</Text>
         <View>
-          <TouchableHighlight>
-            <Image/>
-            </TouchableHighlight>
+  
+            <View style ={[styles.boxStyle1, styles.box1]}>
+                <View style ={styles.box1_1}>
+                  <TouchableOpacity>
+                  <Image style={styles.images}  resizeMode='contain' source={require('../assets/Home-Electrician.png')} />
+                  </TouchableOpacity>
+                </View>
+                <View style ={styles.box1_1}>
+                  <TouchableOpacity>
+                  <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Cleaning.png')} />
+                  </TouchableOpacity>
+                
+                </View>
+                <View style ={styles.box1_1}>
+                  <TouchableOpacity>
+                  <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Garden.png')} />
+                  </TouchableOpacity>
+                
+                </View>
+            </View>
+            <View style ={[styles.boxStyle1, styles.box1]}>
+            <View style ={styles.box1_1}>
+                  <TouchableOpacity>
+                  <Image style={styles.images}  resizeMode='contain' source={require('../assets/Home-HouseFix.png')} />
+                  </TouchableOpacity>
+                
+                </View>
+                <View style ={styles.box1_1}>
+                  <TouchableOpacity>
+                  <Image style={styles.images} resizeMode='contain'  source={require('../assets/Home-Salon.png')} />
+                  </TouchableOpacity>
+                
+                </View>
+                <View style ={styles.box1_1}>
+                  <TouchableOpacity>
+                  <Image style={styles.images} resizeMode='contain'  source={require('../assets/Home-Others.png')} />
+                  </TouchableOpacity>
+                
+                </View>
+            </View>
+            <View style ={styles.box2}>
+            <View style ={styles.box2_1}>
+              <Text>Current Points:500</Text>
+            </View>
+            </View>
             </View>
         </View>
         </View>
@@ -69,4 +114,45 @@ const styles = StyleSheet.create({
       color: '#96d459',
       fontSize: 18
   },
+
+boxStyle1: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
+},
+
+box1:{
+    marginTop:50
+
+},
+
+box1_1:{
+    height: 'auto',
+    width: 'auto',
+    marginTop:5,
+    backgroundColor: "#d0f4be",
+    padding:10
+},
+
+images:{
+  height:70,
+  width:70,
+  
+},
+
+box2:{
+ justifyContent: 'flex-end'
+},
+
+
+box2_1:{
+  height: 'auto',
+  marginTop:150,
+  alignItems:'center',
+  backgroundColor: "#fff",
+
+},
+
+
+
   });
+
