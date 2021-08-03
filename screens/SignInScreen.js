@@ -28,7 +28,6 @@ const SignInScreen = ({navigation}) => {
     const { colors } = useTheme();
 
     const textInputChange = (val) => {
-        
         const reg= /\S+@\S+/;
         if( reg.test(val)=== true) {
             setData({
@@ -180,7 +179,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={[styles.signIn, {backgroundColor: '#96d459'}]}
-                    onPress={() => navigation.navigate('HomeScreen')}
+                    onPress={() => navigation.navigate('MainScreen')}
                 >
             
                     <Text style={[styles.textSign, {

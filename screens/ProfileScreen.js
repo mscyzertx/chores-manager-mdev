@@ -1,44 +1,24 @@
 import React from 'react';
-import { Searchbar } from 'react-native-paper';
 import { 
     View, 
-    Text, 
-    Platform,
-    StyleSheet, 
-    TouchableHighlight,
-    Button,
+    Text,
+    StyleSheet ,
     
 } from 'react-native';;
-const HomeScreen = ({navigation}) => {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const onChangeSearch = query => setSearchQuery(query);
+const ProfileScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Chores Manager </Text>
-            <Searchbar
-            placeholder='Search Here'
-            onChangeText={onChangeSearch}
-            value={searchQuery}/>
+            <Text style={styles.text_header}>Account</Text>
         </View>
         <View style={styles.footer} >
-        <Text style={styles.text_footer}>Categories</Text>
-        <View>
-          <TouchableHighlight>
-            <Image/>
-            </TouchableHighlight>
-            </View>
         </View>
         </View>
   )
 }
 
-
-  
-      
-
-export default HomeScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -65,8 +45,5 @@ const styles = StyleSheet.create({
         fontSize: 30,
         paddingBottom:20
     },
-    text_footer: {
-      color: '#96d459',
-      fontSize: 18
-  },
+
   });

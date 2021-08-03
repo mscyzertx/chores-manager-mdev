@@ -4,9 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { AuthContext } from './components/context'
 import RootStackScreen from './screens/RootStackScreen';
+import MainScreen from './screens/MainScreen';
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+
 
 // const OnboardingNavigator = () => {
 //   return (
@@ -30,7 +30,6 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      
         <RootStackScreen/>
  
      </NavigationContainer>
