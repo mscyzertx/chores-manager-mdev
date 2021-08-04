@@ -7,6 +7,7 @@ import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import HomeScreen from './HomeScreen';
 import MainScreen from './MainScreen';
+import CleaningScreen from './CleaningScreen';
 
 const RootStack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const RootStackScreen = ({navigation}) => (
         <RootStack.Screen name='SignInScreen' component={SignInScreen}/>
         <RootStack.Screen name='SignUpScreen' component={SignUpScreen}/>
         <RootStack.Screen name='MainScreen' component={MainScreen}/>
+        <RootStack.Screen name='CleaningScreen' component={CleaningScreen}/>
     </RootStack.Navigator>
 );
 

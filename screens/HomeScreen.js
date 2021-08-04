@@ -36,7 +36,7 @@ const HomeScreen = ({navigation}) => {
                   </TouchableOpacity>
                 </View>
                 <View style ={styles.box1_1}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('CleaningScreen')}>
                   <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Cleaning.png')} />
                   </TouchableOpacity>
                 
