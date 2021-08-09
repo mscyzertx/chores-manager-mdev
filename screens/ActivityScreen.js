@@ -17,6 +17,7 @@ const ActivityScreen = ({navigation}) => {
             <Text style={styles.text_header}>Activity</Text>
         </View>
         <View style={styles.footer} >
+            
         
             <View style ={[styles.boxStyle, styles.box1]}>
                 <View style ={styles.defaultContainer}>

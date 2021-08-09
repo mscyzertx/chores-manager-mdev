@@ -23,15 +23,15 @@ const MainScreen = () => {
             } else if (route.name === 'Profile') {
                 iconName = focused ? 'ios-person' : 'ios-person-outline';
               } 
-            return <Iconicons name={iconName} size={size} color={color} />;
+            return <Iconicons name={iconName} size={size} color={color}/>;
           },
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Activity" component={ActivityScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Home" component={HomeScreen}/>
+        <Tab.Screen name="Activity" component={ActivityScreen}/>
+        <Tab.Screen name="Profile" component={ProfileScreen}/>
       </Tab.Navigator>
 
     )

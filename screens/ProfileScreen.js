@@ -13,6 +13,7 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.text_header}>Account</Text>
         </View>
         <View style={styles.footer} >
+            
         </View>
         </View>
   )

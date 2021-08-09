@@ -2,9 +2,9 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import { AuthContext } from './components/context'
 import RootStackScreen from './screens/RootStackScreen';
 import MainScreen from './screens/MainScreen';
+import HomeScreen from './screens/HomeScreen';
 
 
 
@@ -33,6 +33,9 @@ export default function App() {
         <RootStackScreen/>
  
      </NavigationContainer>
+    
+
+
 
 
   );
