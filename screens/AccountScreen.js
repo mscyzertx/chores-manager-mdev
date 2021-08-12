@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: '#fff',
     paddingHorizontal: 30,
+    paddingVertical: 30
   },
   text_header: {
     color: '#fff',
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
 
   box1: {
     flex: 1,
-    top: -20
+    top: -30
   },
 
   box2: {

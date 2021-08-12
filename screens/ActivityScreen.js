@@ -5,6 +5,7 @@ import {
     Platform,
     StyleSheet,
     SafeAreaView,
+    FlatList
 
 } from 'react-native';
 import { color } from 'react-native-reanimated';
@@ -17,35 +18,24 @@ const ActivityScreen = ({ navigation }) => {
                 <Text style={styles.text_header}>Activity</Text>
             </View>
             <View style={styles.footer} >
-
-
-                <View style={[styles.boxStyle, styles.box1]}>
-                    <View style={styles.defaultContainer}>
-                        <Text style={styles.text_style}>House Cleaning</Text>
-                        <Text style={styles.text_style1}>Time: July 27 14:30PM</Text>
-                        <Text style={styles.text_style}>Status:Processing</Text>
-                    </View>
-                </View>
-                <View style={[styles.boxStyle, styles.box3]}>
-                    <View style={styles.defaultContainer}>
-                        <Text style={styles.text_style}>House Cleaning</Text>
-                        <Text style={styles.text_style1}>Time: July 27 14:30PM</Text>
-                        <Text style={styles.text_style}>Status:Processing</Text>
-                    </View>
-                </View>
-                <View style={[styles.boxStyle, styles.box3]}>
-                    <View style={styles.defaultContainer}>
-                        <Text style={styles.text_style}>House Cleaning</Text>
-                        <Text style={styles.text_style1}>Time: July 27 14:30PM</Text>
-                        <Text style={styles.text_style}>Status:Processing</Text>
-                    </View>
-                </View>
-                <View style={[styles.boxStyle, styles.box3]}>
-                    <View style={styles.defaultContainer}>
-                        <Text style={styles.text_style}>House Cleaning</Text>
-                        <Text style={styles.text_style1}>Time: July 27 14:30PM</Text>
-                        <Text style={styles.text_style}>Status:Processing</Text>
-                    </View>
+                <View style={styles.box1}>
+                    <FlatList
+                        data={[
+                            { ServiceName: 'Cleaning', Time: 'July 27 14:30PM', Status: 'Processing' },
+                            { ServiceName: 'Cleaning', Time: 'July 25 14:30PM', Status: 'Done' },
+                            { ServiceName: 'House fixer', Time: 'July 23 14:30PM', Status: 'Done' },
+                            { ServiceName: 'House fixer', Time: 'July 21 14:30PM', Status: 'Done' },
+                        ]}
+                        renderItem={({ item }) => <View style={[styles.defaultContainer, styles.shadow]}>
+                            <Text style={styles.text_style}>{item.ServiceName}</Text>
+                            <Text style={styles.text_style1}>{item.Time}</Text>
+                            <Text></Text>
+                            {item.Status == 'Done'? 
+                            <Text style={styles.text_style1}>Status: {item.Status}</Text>
+                            : <Text style={styles.text_style}>Status: {item.Status}</Text> }
+                            
+                        </View>}
+                    />
                 </View>
             </View>
         </View>
@@ -57,8 +47,7 @@ export default ActivityScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#96d459'
-
+        backgroundColor: '#96d459',
     },
     header: {
         flex: 1,
@@ -88,7 +77,8 @@ const styles = StyleSheet.create({
     },
 
     box1: {
-        flex: 1
+        flex: 1,
+        padding:10
     },
 
     box3: {
@@ -98,15 +88,25 @@ const styles = StyleSheet.create({
     defaultContainer: {
         flex: 1,
         backgroundColor: "#d0f4be",
-        padding: 10
+        padding: 10,
+        margin:10
     },
 
     text_style: {
-        color: '#5db84d'
+        color: '#5db84d',
+        fontWeight:'bold'
     },
 
     text_style1: {
         color: 'grey'
-    }
+    },
+
+    shadow: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        shadowOpacity: 0.1,
+        elevation: 2,
+      },
 
 });
