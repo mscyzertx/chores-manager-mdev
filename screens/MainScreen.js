@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Iconicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import ActivityScreen from './ActivityScreen';
-import ProfileScreen from './ProfileScreen';
+import AccountScreen from './AccountScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,22 +16,25 @@ const MainScreen = () => {
 
           if (route.name === 'Home') {
             iconName = focused
-              ? 'ios-home'
-              : 'ios-home-outline';
+              ? 'ios-albums'
+              : 'ios-albums-outline';
           } else if (route.name === 'Activity') {
             iconName = focused ? 'ios-notifications' : 'ios-notifications-outline';
-          } else if (route.name === 'Profile') {
+          } else if (route.name === 'Account') {
             iconName = focused ? 'ios-person' : 'ios-person-outline';
           }
-          return <Iconicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
       })}
+
+      tabBarOptions={{
+        activeTintColor: 'green',
+        inactiveTintColor: '#666666',
+      }}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Activity" component={ActivityScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>
 
   )
