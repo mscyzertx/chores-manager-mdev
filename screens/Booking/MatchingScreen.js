@@ -11,35 +11,35 @@ export default class Home extends React.Component {
   renderView = () => {
     const { navigation } = this.props;
     return (
-        
-        <View style={styles.container1}>
+
+      <View style={styles.container1}>
         <View style={styles.header}>
-            <Text style={styles.text_header}>We found you a pro!</Text>
-            <Text style={styles.text_subheader}>Please confirm below details</Text>   
+          <Text style={styles.text_header}>We found you a pro!</Text>
+          <Text style={styles.text_subheader}>Please confirm below details</Text>
         </View>
-        </View>
-    
+      </View>
+
     )
   }
-  
+
   renderProducts = () => {
     const { navigation } = this.props;
     return (
       <View style={styles.container2}>
-      <View style={styles.container2}>        
+        <View style={styles.container2}>
+        </View>
+        <View style={styles.container3}>
+          <Button onPress={() => navigation.navigate('PaymentScreen')} />
+        </View>
       </View>
-      <View style={styles.container3}>
-      <Button onPress={() => navigation.navigate('PaymentScreen')} />
-      </View>
-      </View>
-      
+
     )
   }
 
   render() {
     return (
       <Block flex center style={styles.home}>
-          {this.renderView()}
+        {this.renderView()}
         {this.renderProducts()}
       </Block>
     );
@@ -48,7 +48,7 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   home: {
-    width: width,    
+    width: width,
   },
   search: {
     height: 48,
@@ -57,59 +57,59 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
   },
-  
+
   products: {
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE * 2,
   },
   container1: {
-    flex: 1, 
-    width:'100%',
+    flex: 1,
+    width: '100%',
     backgroundColor: '#96d459',
-    alignItems:'center'
-    
+    alignItems: 'center'
+
   },
 
   container2: {
-    flex: 4, 
-    width:'100%',
-    alignItems:'center'
+    flex: 4,
+    width: '100%',
+    alignItems: 'center'
   },
 
   container3: {
-    flex: 1, 
-    width:'100%',
-    alignItems:'center'
+    flex: 1,
+    width: '100%',
+    alignItems: 'center'
   },
 
   container4: {
-    flex: 1.5, 
-    width:'100%',
-    alignItems:'center'
+    flex: 1.5,
+    width: '100%',
+    alignItems: 'center'
   },
   header: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent:'center',
-      marginTop:10,
-      paddingHorizontal: 30
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    paddingHorizontal: 30
   },
   footer: {
-      flex: 3,
-      backgroundColor: '#fff',
-      paddingHorizontal: 30,
-      paddingVertical: 30
+    flex: 3,
+    backgroundColor: '#fff',
+    paddingHorizontal: 30,
+    paddingVertical: 30
   },
   text_header: {
-      color: '#fff',
-      fontWeight: 'bold',
-      fontSize: 30,
-      paddingBottom:10
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 30,
+    paddingBottom: 10
   },
 
-  text_subheader:{
-      color: '#fff',
-      fontSize: 20
+  text_subheader: {
+    color: '#fff',
+    fontSize: 20
   }
 
 

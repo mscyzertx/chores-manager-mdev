@@ -11,17 +11,17 @@ export default class CleaningScreen extends React.Component {
   renderView = () => {
     const { navigation } = this.props;
     return (
-        
-        <View style={styles.container}>
+
+      <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.text_header} >Cleaning</Text>
-            <Text style={styles.text_subheader}>Please choose your service</Text>   
+          <Text style={styles.text_header} >Cleaning</Text>
+          <Text style={styles.text_subheader}>Please choose your service</Text>
         </View>
-        </View>
-    
+      </View>
+
     )
   }
-  
+
   renderProducts = () => {
     return (
       <ScrollView
@@ -39,7 +39,7 @@ export default class CleaningScreen extends React.Component {
   render() {
     return (
       <Block flex center style={styles.home}>
-          {this.renderView()}
+        {this.renderView()}
         {this.renderProducts()}
       </Block>
     );
@@ -48,7 +48,7 @@ export default class CleaningScreen extends React.Component {
 
 const styles = StyleSheet.create({
   home: {
-    width: width,    
+    width: width,
   },
   search: {
     height: 48,
@@ -57,41 +57,41 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
   },
-  
+
   products: {
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE * 2,
   },
   container: {
-    flex: 1, 
-    width:'100%',
+    flex: 1,
+    width: '100%',
     backgroundColor: '#96d459',
-    alignItems:'center'
-    
+    alignItems: 'center'
+
   },
   header: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent:'center',
-      marginTop:10,
-      paddingHorizontal: 30
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    paddingHorizontal: 30
   },
   footer: {
-      flex: 3,
-      backgroundColor: '#fff',
-      paddingHorizontal: 30,
-      paddingVertical: 30
+    flex: 3,
+    backgroundColor: '#fff',
+    paddingHorizontal: 30,
+    paddingVertical: 30
   },
   text_header: {
-      color: '#fff',
-      fontWeight: 'bold',
-      fontSize: 30,
-      paddingBottom:10
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 30,
+    paddingBottom: 10
   },
 
-  text_subheader:{
-      color: '#fff',
-      fontSize: 20
+  text_subheader: {
+    color: '#fff',
+    fontSize: 20
   }
 
 

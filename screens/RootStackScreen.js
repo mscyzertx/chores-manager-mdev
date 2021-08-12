@@ -15,18 +15,18 @@ import ConfirmationScreen from './Booking/ConfirmationScreen';
 
 const RootStack = createStackNavigator();
 
-const RootStackScreen = ({navigation}) => (
-    <RootStack.Navigator headerMode='none'> 
-        <RootStack.Screen name='OnboardingScreen' component={OnboardingScreen}/>
-        <RootStack.Screen name='SignInScreen' component={SignInScreen}/>
-        <RootStack.Screen name='SignUpScreen' component={SignUpScreen}/>
-        <RootStack.Screen name='MainScreen' component={MainScreen}/>
-        <RootStack.Screen name='CleaningScreen' component={CleaningScreen}/>
-        <RootStack.Screen name='MapScreen' component={MapScreen}/>
-        <RootStack.Screen name='MatchingScreen' component={MatchingScreen}/>
-        <RootStack.Screen name='PaymentScreen' component={PaymentScreen}/>
-        <RootStack.Screen name='ConfirmationScreen' component={ConfirmationScreen}/>
-        
+const RootStackScreen = ({ navigation }) => (
+    <RootStack.Navigator headerMode='none'>
+        <RootStack.Screen name='OnboardingScreen' component={OnboardingScreen} />
+        <RootStack.Screen name='SignInScreen' component={SignInScreen} />
+        <RootStack.Screen name='SignUpScreen' component={SignUpScreen} />
+        <RootStack.Screen name='MainScreen' component={MainScreen} />
+        <RootStack.Screen name='CleaningScreen' component={CleaningScreen} />
+        <RootStack.Screen name='MapScreen' component={MapScreen} />
+        <RootStack.Screen name='MatchingScreen' component={MatchingScreen} />
+        <RootStack.Screen name='PaymentScreen' component={PaymentScreen} />
+        <RootStack.Screen name='ConfirmationScreen' component={ConfirmationScreen} />
+
     </RootStack.Navigator>
 );
 

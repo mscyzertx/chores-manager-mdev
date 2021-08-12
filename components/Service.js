@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
   },
   productTitle: {
     flex: 1,
-    color:'green',
-    fontWeight:'bold',
+    color: 'green',
+    fontWeight: 'bold',
     flexWrap: 'wrap'
   },
   productDescription: {
     padding: theme.SIZES.BASE,
   },
-  
+
   shadow: {
     shadowColor: theme.COLORS.BLACK,
     shadowOffset: { width: 0, height: 2 },

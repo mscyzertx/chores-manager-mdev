@@ -18,5 +18,5 @@ export default [
     title: 'Laundry',
     price: 180,
   },
-  
+
 ];
