@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -9,8 +9,35 @@ import {
 
 } from 'react-native';
 import { color } from 'react-native-reanimated';
-;
+
+
+
 const ActivityScreen = ({ navigation }) => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+    const getActivityList = async () => {
+      try {
+        const response = await fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/get-activity');
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  
+    useEffect(() => {
+      getActivityList();
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('tabPress', (e) => {
+            getActivityList();
+        });
+    
+        return unsubscribe;
+      }, [navigation]);
 
     return (
         <View style={styles.container}>
@@ -20,12 +47,8 @@ const ActivityScreen = ({ navigation }) => {
             <View style={styles.footer} >
                 <View style={styles.box1}>
                     <FlatList
-                        data={[
-                            { ServiceName: 'Cleaning', Time: 'July 27 14:30PM', Status: 'Processing' },
-                            { ServiceName: 'Cleaning', Time: 'July 25 14:30PM', Status: 'Done' },
-                            { ServiceName: 'House fixer', Time: 'July 23 14:30PM', Status: 'Done' },
-                            { ServiceName: 'House fixer', Time: 'July 21 14:30PM', Status: 'Done' },
-                        ]}
+                        data={data}
+                        keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) => <View style={[styles.defaultContainer, styles.shadow]}>
                             <Text style={styles.text_style}>{item.ServiceName}</Text>
                             <Text style={styles.text_style1}>{item.Time}</Text>
