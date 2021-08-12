@@ -3,12 +3,39 @@ import { StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-nati
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../../components/Service';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 
-const { width } = Dimensions.get('screen');
+
+const { width, height } = Dimensions.get('screen');
+const ASPECT_RATIO = width / height;
+const LATITUDE = 37.78825;
+const LONGITUDE = -122.4324;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+let id = 1;
 import products from '../../constants/services';
 
 export default class MapScreen extends React.Component {
+
+
+
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      region: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      },
+      markers: [{
+        coordinate: { latitude: LATITUDE, longitude: LONGITUDE },
+        key: id++
+      }],
+    };
+  }
 
   renderView = () => {
     const { navigation } = this.props;
@@ -16,8 +43,8 @@ export default class MapScreen extends React.Component {
 
       <View style={styles.container1}>
         <View style={styles.header}>
-          <Text style={styles.text_header}>Cleaning</Text>
-          <Text style={styles.text_subheader}>Please choose your service</Text>
+          <Text style={styles.text_header}>Location & Time</Text>
+          <Text style={styles.text_subheader}>Please confirm location and time</Text>
         </View>
       </View>
 
@@ -26,25 +53,66 @@ export default class MapScreen extends React.Component {
     )
   }
 
+
   renderProducts = () => {
     const { navigation } = this.props;
+
     return (
+
       <View style={styles.container2}>
-        <View style={styles.container3}>
+        <View style={styles.container21}>
           <MapView style={styles.map}
             initialRegion={{
               latitude: 37.78825,
               longitude: -122.4324,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
-            }} />
+            }} onPress={e => this.onMapPress(e)}>
+            {this.state.markers.map(marker => (
+              <Marker
+                key={marker.key}
+                coordinate={marker.coordinate}
+              />
+            ))}</MapView>
         </View>
-        <View style={styles.container4}>
-          <Button onPress={() => navigation.navigate('MatchingScreen')} />
+        <View style={styles.container22}>
+          <View style={styles.container221}>
+            <Block card style={[styles.products, styles.shadow]}>
+              <TouchableOpacity>
+                <Text style={styles.text_address}> 497 Evergreen Rd. Roseville </Text>
+              </TouchableOpacity>
+            </Block>
+          </View>
+          <View style={styles.container221}>
+            <Block card style={[styles.products, styles.shadow]}>
+              <TouchableOpacity>
+                <Text style={styles.text_time} > 8:00 PM JULY 27 2021 </Text>
+              </TouchableOpacity>
+            </Block>
+          </View>
+          <View style={styles.container221}>
+            <TouchableOpacity style={styles.button}
+              onPress={() => navigation.navigate('MatchingScreen')}>
+              <Text style={styles.text_button}>CONFIRM</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
       </View>
 
     )
+  }
+
+
+  onMapPress = (e) => {
+    this.setState({
+      markers: [
+        {
+          coordinate: e.nativeEvent.coordinate,
+          key: id++
+        },
+      ],
+    });
   }
 
   render() {
@@ -70,8 +138,21 @@ const styles = StyleSheet.create({
   },
 
   products: {
-    width: width - theme.SIZES.BASE * 2,
-    paddingVertical: theme.SIZES.BASE * 2,
+    flex: 1,
+    backgroundColor: theme.COLORS.WHITE,
+    marginVertical: theme.SIZES.BASE,
+    width: "90%",
+    borderWidth: 0,
+    minHeight: "25%",
+    justifyContent: "center"
+  },
+
+  shadow: {
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+    elevation: 2,
   },
 
   container1: {
@@ -88,16 +169,25 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  container3: {
-    flex: 1,
+  container21: {
+    flex: 1.5,
     width: '100%',
     alignItems: 'center'
   },
 
-  container4: {
-    flex: 1.5,
+  container22: {
+    flex: 1,
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    top: -30
+  },
+
+  container221: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
 
 
@@ -126,10 +216,37 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
 
+  text_address: {
+    color: '#77AA46',
+    fontWeight: 'bold',
+    fontSize: 16,
+    left: 5
+  },
+
+  text_time: {
+    color: '#000',
+    fontSize: 16,
+    left: 5
+  },
+
+  text_button: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+
   map: {
     width: "100%",
     height: "100%",
   },
+
+  button: {
+    backgroundColor: '#97D55A',
+    alignItems: 'center',
+    width: "80%",
+    padding: 15,
+    borderRadius: 10,
+  }
 
 
 });

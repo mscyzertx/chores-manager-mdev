@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../../components/Service';
+import Iconicons from 'react-native-vector-icons/Ionicons';
 
 const { width } = Dimensions.get('screen');
 import products from '../../constants/services';
@@ -26,10 +27,39 @@ export default class Home extends React.Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container2}>
-        <View style={styles.container2}>
+        <View style={styles.container21}>
+          <Block card style={[styles.products, styles.shadow]}>
+            <View style={styles.container211}>
+              <View style={styles.container212}>
+                <Iconicons name='ios-person' size='80' color='#77AA46' />
+              </View>
+              <View style={styles.container213}>
+                <Text style={styles.text_green_bold_2}> John DOE </Text>
+                <Text style={styles.text_black}> San Francisco, CA </Text>
+                <Text style={styles.text_green}> Rate: 200$ / Hour </Text>
+              </View>
+            </View>
+            <View style={styles.container214}>
+              <View style={{ borderBottomColor: 'black', borderBottomWidth: 5, margin: 10 }} />
+              <Text style={styles.text_black}></Text>
+              <Text style={styles.text_green}> Mobile: +123456789 </Text>
+              <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, margin: 10 }} />
+              <Text style={styles.text_green}> Email: john.doe@gmail.com </Text>
+              <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, margin: 10 }} />
+              <Text style={styles.text_green}> Message: +123456789 </Text>
+
+            </View>
+          </Block>
         </View>
-        <View style={styles.container3}>
-          <Button onPress={() => navigation.navigate('MainScreen')} />
+        <View style={styles.container22}>
+          <View style={styles.container221}>
+          </View>
+          <View style={styles.container222}>
+            <TouchableOpacity style={styles.button}
+              onPress={() => navigation.navigate('MainScreen')}>
+              <Text style={styles.text_button}>BACK TO HOME</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     )
@@ -58,8 +88,21 @@ const styles = StyleSheet.create({
   },
 
   products: {
-    width: width - theme.SIZES.BASE * 2,
-    paddingVertical: theme.SIZES.BASE * 2,
+    flex: 1,
+    backgroundColor: theme.COLORS.WHITE,
+    marginVertical: theme.SIZES.BASE,
+    width: "90%",
+    borderWidth: 0,
+    minHeight: "25%",
+    justifyContent: "center"
+  },
+
+  shadow: {
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+    elevation: 2,
   },
   container1: {
     flex: 1,
@@ -75,17 +118,53 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  container3: {
+  container21: {
+    flex: 1.5,
+    width: '100%',
+    alignItems: 'center',
+    top: -30,
+  },
+
+  container211: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  container212: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container213: {
+    flex: 2,
+    width: '100%',
+    justifyContent: 'center'
+  },
+
+  container214: {
+    flex: 1.5,
+    width: '100%',
+    alignItems: 'flex-start',
+  },
+
+  container22: {
     flex: 1,
     width: '100%',
     alignItems: 'center'
   },
 
-  container4: {
-    flex: 1.5,
+  container221: {
+    flex: 1,
     width: '100%',
-    alignItems: 'center'
   },
+
+  container222: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
+  },
+
   header: {
     flex: 1,
     alignItems: 'center',
@@ -109,7 +188,52 @@ const styles = StyleSheet.create({
   text_subheader: {
     color: '#fff',
     fontSize: 20
+  },
+
+  text_green_bold: {
+    color: '#77AA46',
+    fontWeight: 'bold',
+    fontSize: 16,
+    left: 10,
+    padding: 8
+  },
+
+  text_green_bold_2: {
+    color: '#77AA46',
+    fontWeight: 'bold',
+    fontSize: 20,
+    left: 10,
+    padding: 8
+  },
+
+  text_green: {
+    color: '#77AA46',
+    fontSize: 16,
+    left: 10,
+    padding: 8
+  },
+
+  text_black: {
+    color: '#000',
+    fontSize: 16,
+    left: 10,
+    padding: 8
+  },
+
+  text_button: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+
+  button: {
+    backgroundColor: '#97D55A',
+    alignItems: 'center',
+    width: "80%",
+    padding: 15,
+    borderRadius: 10,
   }
+
 
 
 });

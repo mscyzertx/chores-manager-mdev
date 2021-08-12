@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
 
           <View style={[styles.boxStyle1, styles.box1]}>
             <View style={styles.box1_1}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('CleaningScreen')}>
                 <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Electrician.png')} />
               </TouchableOpacity>
             </View>
@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
 
             </View>
             <View style={styles.box1_1}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('CleaningScreen')}>
                 <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Garden.png')} />
               </TouchableOpacity>
 
@@ -50,19 +50,19 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <View style={[styles.boxStyle1, styles.box1]}>
             <View style={styles.box1_1}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('CleaningScreen')}>
                 <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-HouseFix.png')} />
               </TouchableOpacity>
 
             </View>
             <View style={styles.box1_1}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('CleaningScreen')}>
                 <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Salon.png')} />
               </TouchableOpacity>
 
             </View>
             <View style={styles.box1_1}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('CleaningScreen')}>
                 <Image style={styles.images} resizeMode='contain' source={require('../assets/Home-Others.png')} />
               </TouchableOpacity>
 
