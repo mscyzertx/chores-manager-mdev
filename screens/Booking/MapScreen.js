@@ -14,12 +14,13 @@ export default class MapScreen extends React.Component {
     const { navigation } = this.props;
     return (
         
-        <View style={styles.container}>
+        <View style={styles.container1}>
         <View style={styles.header}>
             <Text style={styles.text_header}>Cleaning</Text>
             <Text style={styles.text_subheader}>Please choose your service</Text>   
         </View>
         </View>
+        
 
     
     )
@@ -28,8 +29,8 @@ export default class MapScreen extends React.Component {
   renderProducts = () => {
     const { navigation } = this.props;
     return (
-      <View>
-      <View>
+      <View style={styles.container2}>
+      <View style={styles.container3}>
       <MapView style={styles.map}
         initialRegion={{
         latitude: 37.78825,
@@ -38,9 +39,9 @@ export default class MapScreen extends React.Component {
         longitudeDelta: 0.0421,
       }}/>
       </View>
-
-      <View style={styles.container} />
+      <View style={styles.container4}>
       <Button onPress={() => navigation.navigate('MatchingScreen')} />
+      </View>
       </View>
 
     )
@@ -72,13 +73,34 @@ const styles = StyleSheet.create({
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE * 2,
   },
-  container: {
+  
+  container1: {
     flex: 1, 
     width:'100%',
     backgroundColor: '#96d459',
     alignItems:'center'
     
   },
+
+  container2: {
+    flex: 4, 
+    width:'100%',
+    alignItems:'center'
+  },
+
+  container3: {
+    flex: 1, 
+    width:'100%',
+    alignItems:'center'
+  },
+
+  container4: {
+    flex: 1.5, 
+    width:'100%',
+    alignItems:'center'
+  },
+
+
   header: {
       flex: 1,
       alignItems: 'center',
@@ -105,8 +127,8 @@ const styles = StyleSheet.create({
   },
 
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.5,
+    width: "100%",
+    height: "100%",
   },
 
 

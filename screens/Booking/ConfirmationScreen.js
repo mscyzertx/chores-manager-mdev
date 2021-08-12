@@ -12,12 +12,12 @@ export default class Home extends React.Component {
     const { navigation } = this.props;
     return (
         
-        <View style={styles.container}>
-        <View style={styles.header}>
-            <Text style={styles.text_header}>Cleaning</Text>
-            <Text style={styles.text_subheader}>Please choose your service</Text>   
-        </View>
-        </View>
+      <View style={styles.container1}>
+      <View style={styles.header}>
+          <Text style={styles.text_header}>SUCCESS!</Text>
+          <Text style={styles.text_subheader}></Text>   
+      </View>
+      </View>
     
     )
   }
@@ -25,16 +25,13 @@ export default class Home extends React.Component {
   renderProducts = () => {
     const { navigation } = this.props;
     return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.products}>
-        <Block flex>
-        <Block flex>
-          <Product product={products[0]} horizontal />
-        </Block>
-        <Button onPress={() => navigation.navigate('MainScreen')} />
-        </Block>
-      </ScrollView>
+      <View style={styles.container2}>
+      <View style={styles.container2}>        
+      </View>
+      <View style={styles.container3}>
+      <Button onPress={() => navigation.navigate('MainScreen')} />
+      </View>
+      </View>
     )
   }
 
@@ -64,12 +61,30 @@ const styles = StyleSheet.create({
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE * 2,
   },
-  container: {
+  container1: {
     flex: 1, 
     width:'100%',
     backgroundColor: '#96d459',
     alignItems:'center'
     
+  },
+
+  container2: {
+    flex: 4, 
+    width:'100%',
+    alignItems:'center'
+  },
+
+  container3: {
+    flex: 1, 
+    width:'100%',
+    alignItems:'center'
+  },
+
+  container4: {
+    flex: 1.5, 
+    width:'100%',
+    alignItems:'center'
   },
   header: {
       flex: 1,
