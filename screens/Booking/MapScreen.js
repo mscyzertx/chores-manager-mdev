@@ -1,38 +1,48 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
-import Product from '../components/Service';
+import Product from '../../components/Service';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 const { width } = Dimensions.get('screen');
-import products from '../constants/services';
+import products from '../../constants/services';
 
-export default class CleaningScreen extends React.Component {
+export default class MapScreen extends React.Component {
+  
   renderView = () => {
     const { navigation } = this.props;
     return (
         
         <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.text_header} >Cleaning</Text>
+            <Text style={styles.text_header}>Cleaning</Text>
             <Text style={styles.text_subheader}>Please choose your service</Text>   
         </View>
         </View>
+
     
     )
   }
   
   renderProducts = () => {
+    const { navigation } = this.props;
     return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.products}>
-        <Block flex>
-          <Product navigation={this.props.navigation} product={products[0]} horizontal />
-          <Product navigation={this.props.navigation} product={products[1]} horizontal />
-          <Product navigation={this.props.navigation} product={products[1]} horizontal />
-        </Block>
-      </ScrollView>
+      <View>
+      <View>
+      <MapView style={styles.map}
+        initialRegion={{
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }}/>
+      </View>
+
+      <View style={styles.container} />
+      <Button onPress={() => navigation.navigate('MatchingScreen')} />
+      </View>
+
     )
   }
 
@@ -92,7 +102,12 @@ const styles = StyleSheet.create({
   text_subheader:{
       color: '#fff',
       fontSize: 20
-  }
+  },
+
+  map: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height * 0.5,
+  },
 
 
 });

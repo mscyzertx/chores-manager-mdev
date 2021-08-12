@@ -2,19 +2,19 @@ import React from 'react';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
-import Product from '../components/Service';
+import Product from '../../components/Service';
 
 const { width } = Dimensions.get('screen');
-import products from '../constants/services';
+import products from '../../constants/services';
 
-export default class CleaningScreen extends React.Component {
+export default class Home extends React.Component {
   renderView = () => {
     const { navigation } = this.props;
     return (
         
         <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.text_header} >Cleaning</Text>
+            <Text style={styles.text_header}>Cleaning</Text>
             <Text style={styles.text_subheader}>Please choose your service</Text>   
         </View>
         </View>
@@ -23,14 +23,16 @@ export default class CleaningScreen extends React.Component {
   }
   
   renderProducts = () => {
+    const { navigation } = this.props;
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.products}>
         <Block flex>
-          <Product navigation={this.props.navigation} product={products[0]} horizontal />
-          <Product navigation={this.props.navigation} product={products[1]} horizontal />
-          <Product navigation={this.props.navigation} product={products[1]} horizontal />
+        <Block flex>
+          <Product product={products[0]} horizontal />
+        </Block>
+        <Button onPress={() => navigation.navigate('MainScreen')} />
         </Block>
       </ScrollView>
     )

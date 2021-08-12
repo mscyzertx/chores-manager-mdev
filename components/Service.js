@@ -8,10 +8,9 @@ class Product extends React.Component {
   render() {
     const { navigation, product, horizontal, style, priceColor } = this.props;
 
-
     return (
       <Block row={horizontal} card flex style={[styles.product, styles.shadow, style]}>
-        <TouchableWithoutFeedback >
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('MapScreen')} >
           <Block flex space="between" style={styles.productDescription}>
             <Text size={16} style={styles.productTitle}>{product.title}</Text>
             <Text size={12} color={priceColor}>Avg Rate:${product.price}/hours</Text>

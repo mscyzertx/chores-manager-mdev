@@ -8,6 +8,10 @@ import SignUpScreen from './SignUpScreen';
 import HomeScreen from './HomeScreen';
 import MainScreen from './MainScreen';
 import CleaningScreen from './CleaningScreen';
+import MapScreen from './Booking/MapScreen';
+import MatchingScreen from './Booking/MatchingScreen';
+import PaymentScreen from './Booking/PaymentScreen';
+import ConfirmationScreen from './Booking/ConfirmationScreen';
 
 const RootStack = createStackNavigator();
 
@@ -18,6 +22,11 @@ const RootStackScreen = ({navigation}) => (
         <RootStack.Screen name='SignUpScreen' component={SignUpScreen}/>
         <RootStack.Screen name='MainScreen' component={MainScreen}/>
         <RootStack.Screen name='CleaningScreen' component={CleaningScreen}/>
+        <RootStack.Screen name='MapScreen' component={MapScreen}/>
+        <RootStack.Screen name='MatchingScreen' component={MatchingScreen}/>
+        <RootStack.Screen name='PaymentScreen' component={PaymentScreen}/>
+        <RootStack.Screen name='ConfirmationScreen' component={ConfirmationScreen}/>
+        
     </RootStack.Navigator>
 );
 
