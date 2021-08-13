@@ -13,7 +13,7 @@ class Product extends React.Component {
         <TouchableWithoutFeedback onPress={() => navigation.navigate('MapScreen')} >
           <Block flex space="between" style={styles.productDescription}>
             <Text size={16} style={styles.productTitle}>{product.title}</Text>
-            <Text size={12} color={priceColor}>Avg Rate:${product.price}/hours</Text>
+            <Text style={styles.productRate} color={priceColor}>Avg Rate:${product.price}/hours</Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>
@@ -25,16 +25,19 @@ export default Product;
 
 const styles = StyleSheet.create({
   product: {
-    backgroundColor: theme.COLORS.WHITE,
+    backgroundColor: '#CFF4BE',
     marginVertical: theme.SIZES.BASE,
     borderWidth: 0,
-    minHeight: 114,
+    minHeight: 80,
   },
   productTitle: {
     flex: 1,
-    color: 'green',
+    color: '#77AA46',
     fontWeight: 'bold',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+  },
+  productRate:{
+    textAlign:'right'
   },
   productDescription: {
     padding: theme.SIZES.BASE,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, FlatList } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../components/Service';
@@ -24,15 +24,14 @@ export default class CleaningScreen extends React.Component {
 
   renderProducts = () => {
     return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.products}>
-        <Block flex>
-          <Product navigation={this.props.navigation} product={products[0]} horizontal />
-          <Product navigation={this.props.navigation} product={products[1]} horizontal />
-          <Product navigation={this.props.navigation} product={products[1]} horizontal />
-        </Block>
-      </ScrollView>
+      <View style={styles.footer} >
+        
+          <FlatList
+            data={products}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => <Product navigation={this.props.navigation} product={item} />}
+          />
+      </View>
     )
   }
 
@@ -77,10 +76,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30
   },
   footer: {
-    flex: 3,
+    flex: 4,
     backgroundColor: '#fff',
     paddingHorizontal: 30,
-    paddingVertical: 30
+    paddingVertical: 30,
+    width:"100%"
+
   },
   text_header: {
     color: '#fff',
