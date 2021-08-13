@@ -70,6 +70,7 @@ const SignInScreen = ({ navigation }) => {
     }
 
     const handleValidUser = (val) => {
+        const reg = /\S+@\S+/;
         if (reg.test(val) === true) {
             setData({
                 ...data,
@@ -82,6 +83,44 @@ const SignInScreen = ({ navigation }) => {
             });
         }
     }
+
+    const getActivityList = async () => {
+        try {
+          const response = await fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/sign-in',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              UserName: data.email,
+              Password: data.password
+            })
+          });
+        
+          const json = await response.json();
+          if (json.UserId) {
+              navigation.navigate("MainScreen");
+          } else {
+            Alert.alert(
+                ' ',
+                'ERROR: '+json.Error,
+                [
+                  {
+                    text: 'OK', onPress: () => {
+                    }
+                  },
+                ],
+                { cancelable: false },
+              )
+          }
+ 
+        } catch (error) {
+          console.error(error);
+        } finally {
+        }
+      }
 
 
     return (
@@ -124,11 +163,13 @@ const SignInScreen = ({ navigation }) => {
                         </Animatable.View>
                         : null}
                 </View>
-                {data.isValidUser ? null :
-                    <Animatable.View animation="fadeInLeft" duration={500}>
+                {data.isValidUser ? null : null}
+                {
+                    /*<Animatable.View animation="fadeInLeft" duration={500}>
                         <Text style={styles.errorMsg}>Email must contain @</Text>
-                    </Animatable.View>
+                </Animatable.View>*/
                 }
+                
 
 
 
@@ -166,20 +207,18 @@ const SignInScreen = ({ navigation }) => {
                         }
                     </TouchableOpacity>
                 </View>
-                {data.isValidPassword ? null :
+                {data.isValidPassword ? null : null}
+                {null/*
                     <Animatable.View animation="fadeInLeft" duration={500}>
                         <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
-                    </Animatable.View>
-                }
+                </Animatable.View>*/}
+                
 
 
-                <TouchableOpacity>
-                    <Text style={{ color: '#96d459', marginTop: 15 }}>Forgot password?</Text>
-                </TouchableOpacity>
                 <View style={styles.button}>
                     <TouchableOpacity
                         style={[styles.signIn, { backgroundColor: '#96d459' }]}
-                        onPress={() => navigation.navigate('MainScreen')}
+                        onPress={() => getActivityList()}
                     >
 
                         <Text style={[styles.textSign, {
@@ -214,15 +253,15 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50
+        justifyContent: 'center',
+        alignItems:'center',
+        paddingHorizontal: 0,
     },
     footer: {
         flex: 3,
         backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
         paddingHorizontal: 20,
         paddingVertical: 30
     },

@@ -9,7 +9,8 @@ import {
     Platform,
     StyleSheet,
     ScrollView,
-    StatusBar
+    StatusBar,
+    Alert
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -71,10 +72,57 @@ const SignUpScreen = ({ navigation }) => {
         });
     }
 
+    const signUp = async () => {
+        try {
+            const response = await fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/sign-up',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        UserName: data.email,
+                        Password: data.password
+                    })
+                });
+
+            const json = await response.json();
+            if (json.UserId) {
+                Alert.alert(' ', 'Sign Up Successful',
+                    [{
+                        text: 'OK', onPress: () => { navigation.navigate("MainScreen"); }
+                    },],
+                    { cancelable: false })
+            } else {
+                Alert.alert(' ', 'ERROR: ' + json.Error,
+                    [{
+                        text: 'OK', onPress: () => { }
+                    },],
+                    { cancelable: false })
+            }
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+        }
+    }
+
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.text_header}>Sign Up </Text>
+
+            <View style={styles.container1}>
+
+                <View style={styles.header}>
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}>
+                        <Text style={styles.text_button_back}>←</Text>
+                    </TouchableOpacity>
+                    <View style={styles.header_2}>
+                        <Text style={styles.text_header} >Sign Up</Text>
+                        <Text style={styles.text_subheader}>Please fill in the detail</Text>
+                    </View>
+                </View>
             </View>
             <Animatable.View
                 animation="fadeInUpBig"
@@ -192,7 +240,7 @@ const SignUpScreen = ({ navigation }) => {
                     <View style={styles.button}>
                         <TouchableOpacity
                             style={[styles.signUp, { backgroundColor: '#96d459' }]}
-                            onPress={() => { }}
+                            onPress={() => { signUp() }}
                         >
                             <Text style={[styles.textSign, {
                                 color: '#fff'
@@ -200,18 +248,6 @@ const SignUpScreen = ({ navigation }) => {
 
                         </TouchableOpacity>
 
-                        <TouchableOpacity
-                            onPress={() => navigation.goBack()}
-                            style={[styles.signUp, {
-                                borderColor: '#96d459',
-                                borderWidth: 1,
-                                marginTop: 15
-                            }]}
-                        >
-                            <Text style={[styles.textSign, {
-                                color: '#96d459'
-                            }]}>Sign In</Text>
-                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </Animatable.View>
@@ -226,17 +262,37 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#96d459'
     },
+
+    container1: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#96d459',
+        alignItems: 'center'
+
+    },
+
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+        paddingHorizontal: 30
     },
+
+    header_1: { flex: 1 },
+    header_2: {
+        flex: 10,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     footer: {
         flex: Platform.OS === 'ios' ? 3 : 5,
         backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
         paddingHorizontal: 20,
         paddingVertical: 30
     },
@@ -245,6 +301,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30
     },
+    text_subheader: {
+        color: '#fff',
+        fontSize: 20
+    },
+
     text_footer: {
         color: '#96d459',
         fontSize: 18
@@ -284,5 +345,10 @@ const styles = StyleSheet.create({
     },
     color_textPrivate: {
         color: 'grey'
+    },
+    text_button_back: {
+        color: '#fff',
+        fontSize: 40,
+        textAlign: 'left'
     }
 });
