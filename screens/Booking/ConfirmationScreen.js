@@ -32,7 +32,7 @@ export default class ConfirmationScreen extends React.Component {
           <Block card style={[styles.products, styles.shadow]}>
             <View style={styles.container211}>
               <View style={styles.container212}>
-                <Iconicons name='ios-person' size='80' color='#77AA46' />
+                <Iconicons name='ios-person' size={60} color='#77AA46' />
               </View>
               <View style={styles.container213}>
                 <Text style={styles.text_green_bold_2}> {data.name} </Text>

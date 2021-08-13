@@ -22,7 +22,7 @@ const AccountScreen = ({ navigation }) => {
           >
             <View style={styles.defaultContainer}>
               <Text style={styles.text_style}>
-                <Ionicons name="create" size='20' />
+                <Ionicons name="create" size={20} />
                 {'\t'} Edit info
               </Text>
             </View>
@@ -33,7 +33,7 @@ const AccountScreen = ({ navigation }) => {
             <View style={styles.defaultContainer}>
 
               <Text style={styles.text_style}>
-                <Ionicons name="notifications" size='20' />
+                <Ionicons name="notifications" size={20} />
                 {'\t'} Member points</Text>
             </View>
           </TouchableOpacity>
@@ -44,7 +44,7 @@ const AccountScreen = ({ navigation }) => {
             <View style={styles.defaultContainer}>
 
               <Text style={styles.text_style}>
-                <Ionicons name="log-out" size='20' />
+                <Ionicons name="log-out" size={20} />
                 {'\t'} Log out</Text>
             </View>
           </  TouchableOpacity>
@@ -54,7 +54,7 @@ const AccountScreen = ({ navigation }) => {
             <View style={styles.defaultContainer}>
 
               <Text style={styles.text_style}>
-                <Ionicons name="help-circle" size='20' />
+                <Ionicons name="help-circle" size={20} />
                 {'\t'} Help</Text>
             </View>
           </TouchableOpacity>

@@ -3,7 +3,8 @@ import { StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-nati
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../../components/Service';
-import Iconicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const { width } = Dimensions.get('screen');
 import products from '../../constants/services';
@@ -40,7 +41,7 @@ export default class MatchingScreen extends React.Component {
           <Block card style={[styles.products, styles.shadow]}>
             <View style={styles.container211}>
               <View style={styles.container212}>
-                <Iconicons name='ios-person' size='80' color='#77AA46'/>
+                <Ionicons name='ios-person' size={60} color='#77AA46'/>
               </View>
               <View style={styles.container213}>
                 <Text style={styles.text_green_bold_2}> {data.profData.name} </Text>
