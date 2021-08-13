@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../../components/Service';
@@ -7,30 +7,67 @@ import Product from '../../components/Service';
 const { width } = Dimensions.get('screen');
 import products from '../../constants/services';
 
-export default class Home extends React.Component {
+export default class PaymentScreen extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      data: {}
+    };
+    this.postPayment = this.postPayment.bind(this);
+  }
+
+  postPayment() {
+    const { navigation } = this.props;
+    fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/cm-post-payment',
+      { method: "POST" })
+      .then(res => res.json())
+      .then(response =>
+        this.setState({ data: response },
+          () => Alert.alert(
+            ' ',
+            'YOUR BOOKING IS COMPLETED!',
+            [
+              {
+                text: 'OK', onPress: () => {
+                  navigation.navigate("ConfirmationScreen", this.state.data)
+                }
+              },
+            ],
+            { cancelable: false },
+          )
+
+        ))
+      .catch(error => console.log(error));
+
+  }
+
+
   renderView = () => {
     const { navigation } = this.props;
+
     return (
 
       <View style={styles.container1}>
 
-      <View style={styles.header}>
-        <TouchableOpacity 
-          onPress={() => navigation.goBack()}>
-          <Text style={styles.text_button_back}>←</Text>
-        </TouchableOpacity>
-        <View style={styles.header_2}>
-          <Text style={styles.text_header} >Payment</Text>
-          <Text style={styles.text_subheader}>Please choose your method</Text>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}>
+            <Text style={styles.text_button_back}>←</Text>
+          </TouchableOpacity>
+          <View style={styles.header_2}>
+            <Text style={styles.text_header} >Payment</Text>
+            <Text style={styles.text_subheader}>Please choose your method</Text>
+          </View>
         </View>
       </View>
-    </View>
 
     )
   }
 
   renderProducts = () => {
     const { navigation } = this.props;
+
     return (
       <View style={styles.container2}>
         <View style={styles.container21}>
@@ -49,25 +86,25 @@ export default class Home extends React.Component {
             </View>
             <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
             <View style={styles.text_row}>
-            <TextInput style={styles.text_green_bold} placeholder="123456789" placeholderTextColor="#77AA46" />
+              <TextInput style={styles.text_green_bold} placeholder="123456789" placeholderTextColor="#77AA46" />
               <Text style={styles.text_black}>CARD NUMBER</Text>
             </View>
 
             <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
             <View style={styles.text_row}>
-            <TextInput style={styles.text_green_bold} placeholder="05/21" placeholderTextColor="#77AA46" />
+              <TextInput style={styles.text_green_bold} placeholder="05/21" placeholderTextColor="#77AA46" />
               <Text style={styles.text_black}>EXPIRE DATE</Text>
             </View>
 
             <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
             <View style={styles.text_row}>
-            <TextInput style={styles.text_green_bold} placeholder="123" placeholderTextColor="#77AA46" />
+              <TextInput style={styles.text_green_bold} placeholder="123" placeholderTextColor="#77AA46" />
               <Text style={styles.text_black}>CVV</Text>
             </View>
 
             <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
             <View style={styles.text_row}>
-            <TextInput style={styles.text_green_bold} placeholder="497 Evergreen" placeholderTextColor="#77AA46" />
+              <TextInput style={styles.text_green_bold} placeholder="497 Evergreen" placeholderTextColor="#77AA46" />
               <Text style={styles.text_black}>ADDRESS</Text>
             </View>
 
@@ -75,7 +112,7 @@ export default class Home extends React.Component {
         </View>
         <View style={styles.container23}>
           <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate('ConfirmationScreen')}>
+            onPress={() => this.postPayment()}>
             <Text style={styles.text_button}>PROCESS PAYMENT</Text>
           </TouchableOpacity>
         </View>

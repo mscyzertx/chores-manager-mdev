@@ -34,7 +34,23 @@ export default class MapScreen extends React.Component {
         coordinate: { latitude: LATITUDE, longitude: LONGITUDE },
         key: id++
       }],
+      data: {}
     };
+    this.postMatching = this.postMatching.bind(this);
+
+  }
+
+
+  postMatching() {
+    const { navigation } = this.props;
+    fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/cm-post-matching',
+      { method: "POST" })
+      .then(res => res.json())
+      .then(response =>
+        this.setState({ data: response },
+          () => navigation.navigate("MatchingScreen", this.state.data)))
+      .catch(error => console.log(error));
+
   }
 
   renderView = () => {
@@ -92,7 +108,7 @@ export default class MapScreen extends React.Component {
           </View>
           <View style={styles.container221}>
             <TouchableOpacity style={styles.button}
-              onPress={() => navigation.navigate('MatchingScreen')}>
+              onPress={() => this.postMatching()}>
               <Text style={styles.text_button}>CONFIRM</Text>
             </TouchableOpacity>
           </View>

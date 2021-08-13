@@ -8,9 +8,9 @@ import Iconicons from 'react-native-vector-icons/Ionicons';
 const { width } = Dimensions.get('screen');
 import products from '../../constants/services';
 
-export default class Home extends React.Component {
+export default class ConfirmationScreen extends React.Component {
   renderView = () => {
-    const { navigation } = this.props;
+
     return (
 
       <View style={styles.container1}>
@@ -24,7 +24,8 @@ export default class Home extends React.Component {
   }
 
   renderProducts = () => {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
+    const data = route.params.profData;
     return (
       <View style={styles.container2}>
         <View style={styles.container21}>
@@ -34,23 +35,23 @@ export default class Home extends React.Component {
                 <Iconicons name='ios-person' size='80' color='#77AA46' />
               </View>
               <View style={styles.container213}>
-                <Text style={styles.text_green_bold_2}> John DOE </Text>
-                <Text style={styles.text_black}> San Francisco, CA </Text>
-                <Text style={styles.text_green}> Rate: 200$ / Hour </Text>
+                <Text style={styles.text_green_bold_2}> {data.name} </Text>
+                <Text style={styles.text_black}> {data.address} </Text>
+                <Text style={styles.text_green}> Rate: {data.rate}$/hour </Text>
               </View>
             </View>
             <View style={styles.container214}>
               <Text style={styles.text_black}></Text>
               <View style={styles.text_row}>
-                <Text style={styles.text_green}>+12345678</Text>
+                <Text style={styles.text_green}>{data.phone}</Text>
                 <Text style={styles.text_black}>Mobile</Text>
               </View>
               <View style={styles.text_row}>
-                <Text style={styles.text_green}>john.doe@gmail.com</Text>
+                <Text style={styles.text_green}>{data.email}</Text>
                 <Text style={styles.text_black}>Email</Text>
               </View>
               <View style={styles.text_row}>
-                <Text style={styles.text_green}>+12345678</Text>
+                <Text style={styles.text_green}>{data.message}</Text>
                 <Text style={styles.text_black}>Message</Text>
               </View>
 

@@ -8,7 +8,7 @@ import Iconicons from 'react-native-vector-icons/Ionicons';
 const { width } = Dimensions.get('screen');
 import products from '../../constants/services';
 
-export default class Home extends React.Component {
+export default class MatchingScreen extends React.Component {
   renderView = () => {
     const { navigation } = this.props;
     return (
@@ -32,7 +32,8 @@ export default class Home extends React.Component {
   }
 
   renderProducts = () => {
-    const { navigation } = this.props;
+    const { route, navigation } = this.props;
+    const data = route.params;
     return (
       <View style={styles.container2}>
         <View style={styles.container21}>
@@ -42,22 +43,22 @@ export default class Home extends React.Component {
                 <Iconicons name='ios-person' size='80' color='#77AA46'/>
               </View>
               <View style={styles.container213}>
-                <Text style={styles.text_green_bold_2}> John DOE </Text>
-                <Text style={styles.text_black}> San Francisco, CA </Text>
-                <Text style={styles.text_green}> Rate: 200$ / Hour </Text>
+                <Text style={styles.text_green_bold_2}> {data.profData.name} </Text>
+                <Text style={styles.text_black}> {data.profData.address} </Text>
+                <Text style={styles.text_green}> Rate: {data.profData.rate}$ / Hour </Text>
               </View>
             </View>
           </Block>
         </View>
         <View style={styles.container22}>
           <View style={styles.container221}>
-            <Text style={styles.text_black}> Total time needed for your service: 1.5 hours </Text>
-            <Text style={styles.text_green_bold}> Total: 300$ </Text>
+            <Text style={styles.text_black}> Total time needed for your service: {data.totalTime} hours </Text>
+            <Text style={styles.text_green_bold}> Total: {data.totalAmount}$ </Text>
 
           </View>
           <View style={styles.container222}>
             <TouchableOpacity style={styles.button}
-              onPress={() => navigation.navigate('PaymentScreen')}>
+              onPress={() => navigation.navigate('PaymentScreen',data)}>
               <Text style={styles.text_button}>BOOKING</Text>
             </TouchableOpacity>
           </View>
