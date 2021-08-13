@@ -90,7 +90,7 @@ const SignInScreen = ({ navigation }) => {
                 <Text style={styles.text_header}>Let's Sign In</Text>
             </View>
             <Animatable.View
-                animation="fadeInUpBig"
+                animation="slideInLeft"
                 style={[styles.footer, {
                     backgroundColor: colors.background
                 }]}

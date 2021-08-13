@@ -40,13 +40,19 @@ export default class Home extends React.Component {
               </View>
             </View>
             <View style={styles.container214}>
-              <View style={{ borderBottomColor: 'black', borderBottomWidth: 5, margin: 10 }} />
               <Text style={styles.text_black}></Text>
-              <Text style={styles.text_green}> Mobile: +123456789 </Text>
-              <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, margin: 10 }} />
-              <Text style={styles.text_green}> Email: john.doe@gmail.com </Text>
-              <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, margin: 10 }} />
-              <Text style={styles.text_green}> Message: +123456789 </Text>
+              <View style={styles.text_row}>
+                <Text style={styles.text_green}>+12345678</Text>
+                <Text style={styles.text_black}>Mobile</Text>
+              </View>
+              <View style={styles.text_row}>
+                <Text style={styles.text_green}>john.doe@gmail.com</Text>
+                <Text style={styles.text_black}>Email</Text>
+              </View>
+              <View style={styles.text_row}>
+                <Text style={styles.text_green}>+12345678</Text>
+                <Text style={styles.text_black}>Message</Text>
+              </View>
 
             </View>
           </Block>
@@ -127,7 +133,10 @@ const styles = StyleSheet.create({
 
   container211: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#d3d3d3',
+    margin:10
   },
   container212: {
     flex: 1,
@@ -214,7 +223,7 @@ const styles = StyleSheet.create({
   },
 
   text_black: {
-    color: '#000',
+    color: '#9D9D9D',
     fontSize: 16,
     left: 10,
     padding: 8
@@ -232,7 +241,17 @@ const styles = StyleSheet.create({
     width: "80%",
     padding: 15,
     borderRadius: 10,
-  }
+  },
+  text_row: {
+    marginLeft: 10,
+    marginRight: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'baseline',
+    width:"90%",
+    borderBottomWidth: 1,
+    borderBottomColor: '#d3d3d3'
+  },
 
 
 

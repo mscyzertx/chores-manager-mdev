@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../../components/Service';
@@ -12,13 +12,19 @@ export default class Home extends React.Component {
     const { navigation } = this.props;
     return (
 
-
       <View style={styles.container1}>
-        <View style={styles.header}>
-          <Text style={styles.text_header}>Payment</Text>
-          <Text style={styles.text_subheader}>Please choose your payment method</Text>
+
+      <View style={styles.header}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()}>
+          <Text style={styles.text_button_back}>←</Text>
+        </TouchableOpacity>
+        <View style={styles.header_2}>
+          <Text style={styles.text_header} >Payment</Text>
+          <Text style={styles.text_subheader}>Please choose your method</Text>
         </View>
       </View>
+    </View>
 
     )
   }
@@ -31,23 +37,39 @@ export default class Home extends React.Component {
           <Block card style={[styles.products_1]}>
 
 
-            <Text style={styles.text_green_bold_2}> Cardtype: VISA </Text>
+            <Text style={styles.text_blue_bold}> VISA </Text>
 
           </Block>
         </View>
         <View style={styles.container22}>
           <Block card style={[styles.products, styles.shadow]}>
+            <View style={styles.text_row}>
+              <TextInput style={styles.text_green_bold} placeholder="JOHN DOE" placeholderTextColor="#77AA46" />
+              <Text style={styles.text_black}>CARDHOLDER NAME</Text>
+            </View>
+            <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
+            <View style={styles.text_row}>
+            <TextInput style={styles.text_green_bold} placeholder="123456789" placeholderTextColor="#77AA46" />
+              <Text style={styles.text_black}>CARD NUMBER</Text>
+            </View>
 
+            <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
+            <View style={styles.text_row}>
+            <TextInput style={styles.text_green_bold} placeholder="05/21" placeholderTextColor="#77AA46" />
+              <Text style={styles.text_black}>EXPIRE DATE</Text>
+            </View>
 
-            <Text style={styles.text_green_bold_2}> Cardholder Name: John DOE </Text>
-            <View style={{ borderBottomColor: 'grey', borderBottomWidth: 1, margin:10}}/>
-            <Text style={styles.text_green}> Card Number: 123456789 </Text>
-            <View style={{ borderBottomColor: 'grey', borderBottomWidth: 1, margin:10}}/>
-            <Text style={styles.text_black}> Expiration Date: 05/21 </Text>
-            <View style={{ borderBottomColor: 'grey', borderBottomWidth: 1, margin:10}}/>
-            <Text style={styles.text_black}> CVV: 123 </Text>
-            <View style={{ borderBottomColor: 'grey', borderBottomWidth: 1, margin:10}}/>
-            <Text style={styles.text_black}> Address: 497 Evergreen</Text>
+            <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
+            <View style={styles.text_row}>
+            <TextInput style={styles.text_green_bold} placeholder="123" placeholderTextColor="#77AA46" />
+              <Text style={styles.text_black}>CVV</Text>
+            </View>
+
+            <View style={{ borderBottomColor: '#d3d3d3', borderBottomWidth: 1, margin: 10 }} />
+            <View style={styles.text_row}>
+            <TextInput style={styles.text_green_bold} placeholder="497 Evergreen" placeholderTextColor="#77AA46" />
+              <Text style={styles.text_black}>ADDRESS</Text>
+            </View>
 
           </Block>
         </View>
@@ -142,10 +164,19 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
     paddingHorizontal: 30
+  },
+
+  header_1: { flex: 1 },
+  header_2: {
+    flex: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   footer: {
     flex: 3,
@@ -181,6 +212,14 @@ const styles = StyleSheet.create({
     padding: 8
   },
 
+  text_blue_bold: {
+    color: '#2699FB',
+    fontWeight: 'bold',
+    fontSize: 25,
+    left: 10,
+    padding: 2
+  },
+
   text_green: {
     color: '#77AA46',
     fontSize: 16,
@@ -189,10 +228,18 @@ const styles = StyleSheet.create({
   },
 
   text_black: {
-    color: '#000',
+    color: '#9D9D9D',
     fontSize: 16,
     left: 10,
     padding: 8
+  },
+
+  text_row: {
+    marginLeft: 10,
+    marginRight: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'baseline'
   },
 
   text_button: {
@@ -207,6 +254,12 @@ const styles = StyleSheet.create({
     width: "80%",
     padding: 15,
     borderRadius: 10,
+  },
+
+  text_button_back: {
+    color: '#fff',
+    fontSize: 40,
+    textAlign: 'left'
   }
 
 

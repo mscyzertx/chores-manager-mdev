@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../../components/Service';
@@ -40,15 +40,19 @@ export default class MapScreen extends React.Component {
   renderView = () => {
     const { navigation } = this.props;
     return (
-
       <View style={styles.container1}>
+
         <View style={styles.header}>
-          <Text style={styles.text_header}>Location & Time</Text>
-          <Text style={styles.text_subheader}>Please confirm location and time</Text>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}>
+            <Text style={styles.text_button_back}>←</Text>
+          </TouchableOpacity>
+          <View style={styles.header_2}>
+            <Text style={styles.text_header} >Location & Time</Text>
+            <Text style={styles.text_subheader}>Please confirm location and time</Text>
+          </View>
         </View>
       </View>
-
-
 
     )
   }
@@ -78,16 +82,12 @@ export default class MapScreen extends React.Component {
         <View style={styles.container22}>
           <View style={styles.container221}>
             <Block card style={[styles.products, styles.shadow]}>
-              <TouchableOpacity>
-                <Text style={styles.text_address}> 497 Evergreen Rd. Roseville </Text>
-              </TouchableOpacity>
+              <TextInput style={styles.text_address} placeholder="497 Evergreen Rd. Roseville" placeholderTextColor="#77AA46" />
             </Block>
           </View>
           <View style={styles.container221}>
             <Block card style={[styles.products, styles.shadow]}>
-              <TouchableOpacity>
-                <Text style={styles.text_time} > 8:00 PM JULY 27 2021 </Text>
-              </TouchableOpacity>
+              <TextInput style={styles.text_time} placeholder="8:00 PM JULY 27 2021" placeholderTextColor="#111" />
             </Block>
           </View>
           <View style={styles.container221}>
@@ -193,10 +193,19 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
     paddingHorizontal: 30
+  },
+
+  header_1: { flex: 1 },
+  header_2: {
+    flex: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   footer: {
     flex: 3,
@@ -246,6 +255,11 @@ const styles = StyleSheet.create({
     width: "80%",
     padding: 15,
     borderRadius: 10,
+  },
+  text_button_back: {
+    color: '#fff',
+    fontSize: 40,
+    textAlign: 'left'
   }
 
 

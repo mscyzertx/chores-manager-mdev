@@ -14,11 +14,19 @@ export default class Home extends React.Component {
     return (
 
       <View style={styles.container1}>
+
         <View style={styles.header}>
-          <Text style={styles.text_header}>We found you a pro!</Text>
-          <Text style={styles.text_subheader}>Please confirm below details</Text>
+          <TouchableOpacity 
+            onPress={() => navigation.goBack()}>
+            <Text style={styles.text_button_back}>←</Text>
+          </TouchableOpacity>
+          <View style={styles.header_2}>
+            <Text style={styles.text_header} >We found you a pro!</Text>
+            <Text style={styles.text_subheader}>Please confirm below details</Text>
+          </View>
         </View>
       </View>
+
 
     )
   }
@@ -155,10 +163,19 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
     paddingHorizontal: 30
+  },
+
+  header_1: { flex: 1 },
+  header_2: {
+    flex: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   footer: {
     flex: 3,
@@ -220,6 +237,12 @@ const styles = StyleSheet.create({
     width: "80%",
     padding: 15,
     borderRadius: 10,
+  },
+
+  text_button_back: {
+    color: '#fff',
+    fontSize: 40,
+    textAlign: 'left'
   }
 
 
