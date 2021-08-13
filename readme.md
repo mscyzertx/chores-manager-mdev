@@ -23,3 +23,4 @@ https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/cm-post-payment
 
 ### 6.OTHERS:
 - Map in Map screen can be pin and drag
+- List View: activity screen, product screen (choose category from home screen)

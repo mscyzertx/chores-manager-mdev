@@ -3,13 +3,50 @@ import { StyleSheet, Dimensions, ScrollView, FlatList, TouchableOpacity } from '
 import { Button, Block, Text, theme } from 'galio-framework';
 import { View } from 'react-native';
 import Product from '../components/Service';
-
-const { width } = Dimensions.get('screen');
 import products from '../constants/services';
 
+const { width } = Dimensions.get('screen');
+
+
 export default class CleaningScreen extends React.Component {
+
+  constructor() {
+    super();
+    this.data = {}
+    this.headerTitle =''
+  }
+
   renderView = () => {
-    const { navigation } = this.props;
+    const { route, navigation } = this.props;
+
+    switch (route.params) {
+      case 'Electrician': 
+      this.headerTitle = products.Electrician.header; 
+      this.data=products.Electrician.serviceList; 
+      break;
+
+      case 'Cleaning': 
+      this.headerTitle = products.Cleaning.header;
+      this.data=products.Cleaning.serviceList; 
+      break;
+
+      case 'Garden': 
+      this.headerTitle = products.Garden.header; 
+      this.data=products.Garden.serviceList; 
+      break;
+      case 'HouseFixer': 
+      this.headerTitle = products.HouseFixer.header; 
+      this.data=products.HouseFixer.serviceList; 
+      break;
+      case 'PersonalSalon': 
+      this.headerTitle = products.PersonalSalon.header; 
+      this.data=products.PersonalSalon.serviceList; 
+      break;
+      case 'Other': 
+      this.headerTitle = products.Other.header; 
+      this.data=products.Other.serviceList; 
+      break;
+    }
     return (
 
       <View style={styles.container}>
@@ -20,7 +57,7 @@ export default class CleaningScreen extends React.Component {
             <Text style={styles.text_button}>←</Text>
           </TouchableOpacity>
           <View style={styles.header_2}>
-            <Text style={styles.text_header} >Cleaning</Text>
+            <Text style={styles.text_header} >{this.headerTitle}</Text>
             <Text style={styles.text_subheader}>Please choose your service</Text>
           </View>
         </View>
@@ -34,7 +71,7 @@ export default class CleaningScreen extends React.Component {
       <View style={styles.footer} >
 
         <FlatList
-          data={products}
+          data={this.data}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => <Product navigation={this.props.navigation} product={item} />}
         />

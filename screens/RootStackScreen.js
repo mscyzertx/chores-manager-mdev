@@ -7,7 +7,7 @@ import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import HomeScreen from './HomeScreen';
 import MainScreen from './MainScreen';
-import CleaningScreen from './CleaningScreen';
+import ProductScreen from './ProductScreen';
 import MapScreen from './Booking/MapScreen';
 import MatchingScreen from './Booking/MatchingScreen';
 import PaymentScreen from './Booking/PaymentScreen';
@@ -21,7 +21,7 @@ const RootStackScreen = ({ navigation }) => (
         <RootStack.Screen name='SignInScreen' component={SignInScreen} />
         <RootStack.Screen name='SignUpScreen' component={SignUpScreen} />
         <RootStack.Screen name='MainScreen' component={MainScreen} />
-        <RootStack.Screen name='CleaningScreen' component={CleaningScreen} />
+        <RootStack.Screen name='ProductScreen' component={ProductScreen} />
         <RootStack.Screen name='MapScreen' component={MapScreen} />
         <RootStack.Screen name='MatchingScreen' component={MatchingScreen} />
         <RootStack.Screen name='PaymentScreen' component={PaymentScreen} />
