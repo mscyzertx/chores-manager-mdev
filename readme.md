@@ -27,7 +27,8 @@ https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/cm-post-payment
 
 ### 7. Use Case Diagram 
 
-![usecase-diagram-2](https://user-images.githubusercontent.com/88049001/134711309-fcdc5846-8292-414e-8015-6f8d69cad6ec.jpeg)
+<img width="665" alt="Screen Shot 2021-09-24 at 12 50 14 PM" src="https://user-images.githubusercontent.com/88049001/134712296-183bbde3-b8d9-42c6-a514-2c4ebcaf4bd8.png">
+
 
 ### 8. Activity Diagram
 
