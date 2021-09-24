@@ -25,7 +25,11 @@ https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/cm-post-payment
 - Map in Map screen can be pin and drag
 - List View: activity screen, product screen (choose category from home screen)
 
-### 7. Use Case Diagram ![usecase-diagram-2](https://user-images.githubusercontent.com/88049001/134711309-fcdc5846-8292-414e-8015-6f8d69cad6ec.jpeg)
+### 7. Use Case Diagram 
 
-### 8. Activity Diagram![activity-diagram](https://user-images.githubusercontent.com/88049001/134711435-9b06752d-6a58-4188-b96e-6fa39f116c6d.jpeg)
+![usecase-diagram-2](https://user-images.githubusercontent.com/88049001/134711309-fcdc5846-8292-414e-8015-6f8d69cad6ec.jpeg)
+
+### 8. Activity Diagram!
+
+[activity-diagram](https://user-images.githubusercontent.com/88049001/134711435-9b06752d-6a58-4188-b96e-6fa39f116c6d.jpeg)
 
