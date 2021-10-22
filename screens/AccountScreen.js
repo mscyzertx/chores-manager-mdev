@@ -49,7 +49,7 @@ const AccountScreen = ({ navigation }) => {
             </View>
           </  TouchableOpacity>
           <TouchableOpacity style={[styles.boxStyle, styles.box1, styles.shadow]}
-            onPress={() => Linking.openURL('https://choresmanager.com/helpdesk')}
+            onPress={() => Linking.openURL('http://choresmanager.s3-website.ca-central-1.amazonaws.com/')}
           >
             <View style={styles.defaultContainer}>
 
