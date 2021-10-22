@@ -5,13 +5,16 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Modal,
+  Platform
 } from "react-native";
+
 import { Button, Block, Text, theme } from "galio-framework";
 import { View } from "react-native";
 import Product from "../../components/Service";
 import MapView, { Marker, ProviderPropType } from "react-native-maps";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import {format} from "date-fns";
+import { format } from "date-fns";
 
 const { width, height } = Dimensions.get("screen");
 const ASPECT_RATIO = width / height;
@@ -19,6 +22,7 @@ const LATITUDE = 37.78825;
 const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const majorVersionIOS = parseInt(Platform.Version, 10);
 let id = 1;
 import products from "../../constants/services";
 
@@ -41,8 +45,8 @@ export default class MapScreen extends React.Component {
       ],
       data: {},
       date: new Date(),
-      formattedDate: format(new Date(),"MMMM dd yyyy"),
-      formattedTime: format(new Date(),"hh:mm a"),
+      formattedDate: format(new Date(), "MMMM dd yyyy"),
+      formattedTime: format(new Date(), "hh:mm a"),
       mode: "date",
       showPicker: false,
     };
@@ -86,28 +90,34 @@ export default class MapScreen extends React.Component {
   renderProducts = () => {
     const { navigation } = this.props;
 
+    const iosSpinner = (majorVersionIOS>=14) && (Platform.OS === "ios")?"inline":"spinner";
+
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate || this.state.date;
-      this.setState({ showPicker: Platform.OS === "ios" });
       this.setState({ date: currentDate });
+      this.setState({ showPicker: (Platform.OS==="ios")});
       console.log(this.state.date);
-      this.setState({ formattedDate: format(currentDate,"MMMM dd yyyy") });
-      this.setState({ formattedTime: format(currentDate,"hh:mm a") });
+      this.setState({ formattedDate: format(currentDate, "MMMM dd yyyy") });
+      this.setState({ formattedTime: format(currentDate, "hh:mm a") });
       console.log(this.state.formattedTime);
-      this.setState({ showPicker: false });
     };
 
     const showMode = (currentMode) => {
       this.setState({ showPicker: true });
+      this.setState({ showTime: false });
       this.setState({ mode: currentMode });
     };
 
     const showDatepicker = () => {
-      showMode("date");
+      Platform.OS === "ios" ? showMode("datetime") : showMode("date");
     };
 
     const showTimepicker = () => {
-      showMode("time");
+      Platform.OS === "ios" ? showMode("datetime") : showMode("time");
+    };
+
+    const hideTimepicker = () => {
+      this.setState({ showPicker: false });
     };
 
     return (
@@ -141,30 +151,54 @@ export default class MapScreen extends React.Component {
           <View style={styles.container221}>
             <Block card style={[styles.products, styles.shadow]}>
               <Text>
-            <TouchableOpacity
-                onPress={showTimepicker}
-              >
-                <Text style={styles.text_time}>{this.state.formattedTime} </Text>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={showTimepicker}>
+                  <Text style={styles.text_time}>
+                    {this.state.formattedTime}{" "}
+                  </Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={showDatepicker}
-              >
-                <Text style={styles.text_time}>{this.state.formattedDate}</Text>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={showDatepicker}>
+                  <Text style={styles.text_time}>
+                    {this.state.formattedDate}
+                  </Text>
+                </TouchableOpacity>
               </Text>
- 
 
+              {this.state.showPicker && Platform.OS === "ios" && (
+                <Modal>
+                  <View style={styles.modal_container_1_1}></View>
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={this.state.date}
+                    mode={this.state.mode}
+                    is24Hour={true}
+                    display={iosSpinner}
+                    onChange={onChange}
+                    style={styles.modal_container_1_2}
+                  />
+                  <View style={styles.modal_container_1_3}>
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPress={hideTimepicker}
+                    >
+                      <Text style={styles.text_button}>DONE</Text>
+                    </TouchableOpacity>
+                  </View>
+                </Modal>
+              )}
 
-              {this.state.showPicker && (
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={this.state.date}
-                  mode={this.state.mode}
-                  is24Hour={true}
-                  display="default"
-                  onChange={onChange}
-                />
+              {this.state.showPicker && Platform.OS != "ios" && (
+  
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={this.state.date}
+                    mode={this.state.mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                    style={styles.modal_container_1_2}
+                  />
+                
               )}
             </Block>
           </View>
@@ -335,5 +369,24 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 40,
     textAlign: "left",
+  },
+  modal_container_1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  modal_container_1_1: {
+    flex: 3,
+  },
+
+  modal_container_1_2: {
+    flex: 5,
+  },
+
+  modal_container_1_3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
