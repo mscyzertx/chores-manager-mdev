@@ -15,6 +15,7 @@ import {
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import * as Crypto from 'expo-crypto';
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -74,6 +75,11 @@ const SignUpScreen = ({ navigation }) => {
 
     const signUp = async () => {
         try {
+            const encryptedPassword = await Crypto.digestStringAsync(
+                Crypto.CryptoDigestAlgorithm.SHA256,
+                data.password
+              );
+              console.log('Encrypted Pass: ', encryptedPassword);
             const response = await fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/sign-up',
                 {
                     method: 'POST',
@@ -83,7 +89,7 @@ const SignUpScreen = ({ navigation }) => {
                     },
                     body: JSON.stringify({
                         UserName: data.email,
-                        Password: data.password
+                        Password: encryptedPassword
                     })
                 });
 
