@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
+import * as Crypto from 'expo-crypto';
 
 const SignInScreen = ({ navigation }) => {
 
@@ -84,8 +85,13 @@ const SignInScreen = ({ navigation }) => {
         }
     }
 
-    const getActivityList = async () => {
+    const signinActivity = async () => {
         try {
+          const encryptedPassword = await Crypto.digestStringAsync(
+            Crypto.CryptoDigestAlgorithm.SHA256,
+            data.password
+          );
+          console.log('Encrypted Pass: ', encryptedPassword);
           const response = await fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/sign-in',
           {
             method: 'POST',
@@ -95,7 +101,7 @@ const SignInScreen = ({ navigation }) => {
             },
             body: JSON.stringify({
               UserName: data.email,
-              Password: data.password
+              Password: encryptedPassword
             })
           });
         
@@ -218,7 +224,7 @@ const SignInScreen = ({ navigation }) => {
                 <View style={styles.button}>
                     <TouchableOpacity
                         style={[styles.signIn, { backgroundColor: '#96d459' }]}
-                        onPress={() => getActivityList()}
+                        onPress={() => signinActivity()}
                     >
 
                         <Text style={[styles.textSign, {
