@@ -14,6 +14,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
 import * as Crypto from 'expo-crypto';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignInScreen = ({ navigation }) => {
 
@@ -107,7 +108,8 @@ const SignInScreen = ({ navigation }) => {
         
           const json = await response.json();
           if (json.UserId) {
-              navigation.navigate("MainScreen");
+            await AsyncStorage.setItem('userId',json.UserId);
+            navigation.navigate("MainScreen");
           } else {
             Alert.alert(
                 ' ',
