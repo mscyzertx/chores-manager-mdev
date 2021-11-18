@@ -85,13 +85,14 @@ const HomeScreen = ({ navigation }) => {
               <Text>And More...</Text>
             </View>
           </View>
-          <View style={styles.box2}>
+        </View>
+        
+      </View>
+      <View style={styles.box2}>
             <View style={styles.box2_1}>
               <Text>Current Points:500</Text>
             </View>
           </View>
-        </View>
-      </View>
     </View>
   )
 }
@@ -139,8 +140,7 @@ const styles = StyleSheet.create({
   },
 
   box1: {
-    marginTop: 50
-
+    marginTop: 50,
   },
 
   box1_1: {
@@ -163,13 +163,14 @@ const styles = StyleSheet.create({
   },
 
   box2: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    backgroundColor: 'white'
   },
 
 
   box2_1: {
     height: 'auto',
-    marginTop: 150,
+    marginBottom:10,
     alignItems: 'center',
     backgroundColor: "#fff",
 

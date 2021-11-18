@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "choresManager",
+    "name": "Chores Manager",
     "slug": "choresManager",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,10 +20,18 @@
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleMaps" : {
+          "apiKey" : "AIzaSyATQs2b39VzSaBhfGG2U8ZlSA2ajNFhEb4"
+        }
+      },
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo/playstore.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "icon": "./assets/logo/playstore.png",
+      "versionCode": 3,
+      "package": "com.debugentity.choresmanager"
     },
     "web": {
       "favicon": "./assets/favicon.png"
