@@ -16,6 +16,7 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Crypto from 'expo-crypto';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -95,6 +96,7 @@ const SignUpScreen = ({ navigation }) => {
 
             const json = await response.json();
             if (json.UserId) {
+                await AsyncStorage.setItem('userId',json.UserId);
                 Alert.alert(' ', 'Sign Up Successful',
                     [{
                         text: 'OK', onPress: () => { navigation.navigate("MainScreen"); }
