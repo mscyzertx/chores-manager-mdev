@@ -16,6 +16,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MapView, { Marker, ProviderPropType } from "react-native-maps";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { format } from "date-fns";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get("screen");
 const ASPECT_RATIO = width / height;
@@ -63,8 +64,11 @@ export default class MapScreen extends React.Component {
     )
       .then((res) => res.json())
       .then((response) =>
-        this.setState({ data: response }, () =>
-          navigation.navigate("MatchingScreen", this.state.data)
+        this.setState({ data: response }, () =>{
+          AsyncStorage.setItem('currentAddress',this.state.address);
+          AsyncStorage.setItem('currentTime',this.state.formattedDate + ' ' + this.state.formattedTime);
+          navigation.navigate("MatchingScreen", this.state.data);
+        }
         )
       )
       .catch((error) => console.log(error));
