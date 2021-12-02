@@ -27,6 +27,9 @@ const SignUpScreen = ({ navigation }) => {
         check_textInputChange: false,
         secureTextEntry: true,
         confirm_secureTextEntry: true,
+        fullname:'',
+        age:'',
+        city:''
     });
 
     const textInputChange = (val) => {
@@ -50,6 +53,30 @@ const SignUpScreen = ({ navigation }) => {
         setData({
             ...data,
             password: val
+        });
+    }
+
+
+    const handleFullNameChange = (val) => {
+        setData({
+            ...data,
+            fullname: val
+        });
+    }
+
+
+    const handleAgeChange = (val) => {
+        setData({
+            ...data,
+            age: val.replace(/[^0-9]/g, '')
+        });
+    }
+
+
+    const handleCityChange = (val) => {
+        setData({
+            ...data,
+            city: val
         });
     }
 
@@ -81,6 +108,7 @@ const SignUpScreen = ({ navigation }) => {
                 data.password
               );
               console.log('Encrypted Pass: ', encryptedPassword);
+              console.log(data.email+' '+data.fullname+' '+data.age+' '+data.city+' ');
             const response = await fetch('https://zjil8ive37.execute-api.ca-central-1.amazonaws.com/dev/sign-up',
                 {
                     method: 'POST',
@@ -90,14 +118,17 @@ const SignUpScreen = ({ navigation }) => {
                     },
                     body: JSON.stringify({
                         UserName: data.email,
-                        Password: encryptedPassword
+                        Password: encryptedPassword,
+                        FullName: data.fullname,
+                        Age: data.age,
+                        City: data.city
                     })
                 });
 
             const json = await response.json();
             if (json.UserId) {
                 await AsyncStorage.setItem('userId',json.UserId);
-                Alert.alert(' ', 'Sign Up Successful',
+                Alert.alert(' ', 'Sign Up Successfully',
                     [{
                         text: 'OK', onPress: () => { navigation.navigate("MainScreen"); }
                     },],
@@ -137,20 +168,7 @@ const SignUpScreen = ({ navigation }) => {
                 style={styles.footer}
             >
                 <ScrollView>
-                    <Text style={styles.text_footer}>Full Name</Text>
-                    <View style={styles.action}>
-                        <FontAwesome
-                            name="user-o"
-                            color="#96d459"
-                            size={20}
-                        />
-                        <TextInput
-                            placeholder="John Doe"
-                            style={styles.textInput}
-                            autoCapitalize="none"
-                        />
-                    </View>
-                    <Text style={[styles.text_footer, { marginTop: 35 }]}>Email</Text>
+                    <Text style={[styles.text_footer, { marginTop: 0 }]}>Email</Text>
                     <View style={styles.action}>
                         <FontAwesome
                             name="envelope"
@@ -245,6 +263,59 @@ const SignUpScreen = ({ navigation }) => {
                             }
                         </TouchableOpacity>
                     </View>
+
+                    <Text style={[styles.text_footer, {
+                        marginTop: 35
+                    }]}>Full Name</Text>
+                    <View style={styles.action}>
+                        <FontAwesome
+                            name="user-o"
+                            color="#96d459"
+                            size={20}
+                        />
+                        <TextInput
+                            placeholder="John Doe"
+                            style={styles.textInput}
+                            autoCapitalize="none"
+                            onChangeText={(val) => handleFullNameChange(val)}
+                        />
+                    </View>
+
+                    <Text style={[styles.text_footer, {
+                        marginTop: 35
+                    }]}>Age</Text>
+                    <View style={styles.action}>
+                        <FontAwesome
+                            name="user-o"
+                            color="#96d459"
+                            size={20}
+                        />
+                        <TextInput
+                            placeholder="18"
+                            style={styles.textInput}
+                            autoCapitalize="none"
+                            keyboardType='numeric'
+                            onChangeText={(val) => handleAgeChange(val)}
+                        />
+                    </View>
+
+                    <Text style={[styles.text_footer, {
+                        marginTop: 35
+                    }]}>City</Text>
+                    <View style={styles.action}>
+                        <FontAwesome
+                            name="user-o"
+                            color="#96d459"
+                            size={20}
+                        />
+                        <TextInput
+                            placeholder="Toronto"
+                            style={styles.textInput}
+                            autoCapitalize="none"
+                            onChangeText={(val) => handleCityChange(val)}
+                        />
+                    </View>
+
                     <View style={styles.button}>
                         <TouchableOpacity
                             style={[styles.signUp, { backgroundColor: '#96d459' }]}
