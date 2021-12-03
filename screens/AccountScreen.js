@@ -28,7 +28,7 @@ const AccountScreen = ({ navigation }) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.boxStyle, styles.box1, styles.shadow]}
-            onPress={() => Linking.openURL('https://choresmanager.com/point')}
+            onPress={() => navigation.navigate('MemberScreen')}
           >
             <View style={styles.defaultContainer}>
 

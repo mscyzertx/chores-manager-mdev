@@ -18,7 +18,7 @@ import Feather from "react-native-vector-icons/Feather";
 import * as Crypto from "expo-crypto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const SignUpScreen = ({ navigation }) => {
+const EditInfoScreen = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
 
   const [data, setData] = React.useState({
@@ -421,7 +421,7 @@ const SignUpScreen = ({ navigation }) => {
   );
 };
 
-export default SignUpScreen;
+export default EditInfoScreen;
 
 const styles = StyleSheet.create({
   container: {

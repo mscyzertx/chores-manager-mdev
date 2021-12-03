@@ -12,6 +12,7 @@ import MapScreen from './Booking/MapScreen';
 import MatchingScreen from './Booking/MatchingScreen';
 import PaymentScreen from './Booking/PaymentScreen';
 import ConfirmationScreen from './Booking/ConfirmationScreen';
+import MemberScreen from './MemberScreen';
 
 const RootStack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const RootStackScreen = ({ navigation }) => (
         <RootStack.Screen name='MatchingScreen' component={MatchingScreen} />
         <RootStack.Screen name='PaymentScreen' component={PaymentScreen} />
         <RootStack.Screen name='ConfirmationScreen' component={ConfirmationScreen} />
+        <RootStack.Screen name='MemberScreen' component={MemberScreen} />
 
     </RootStack.Navigator>
 );
