@@ -12,15 +12,17 @@ import {
 import { Button, Block, Text, theme } from "galio-framework";
 import { View } from "react-native";
 import Product from "../../components/Service";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MapView, { Marker, ProviderPropType } from "react-native-maps";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { format } from "date-fns";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get("screen");
 const ASPECT_RATIO = width / height;
 const LATITUDE = 37.78825;
 const LONGITUDE = -122.4324;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.02;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const majorVersionIOS = parseInt(Platform.Version, 10);
 let id = 1;
@@ -45,6 +47,7 @@ export default class MapScreen extends React.Component {
       ],
       data: {},
       date: new Date(),
+      address: "",
       formattedDate: format(new Date(), "MMMM dd yyyy"),
       formattedTime: format(new Date(), "hh:mm a"),
       mode: "date",
@@ -61,15 +64,87 @@ export default class MapScreen extends React.Component {
     )
       .then((res) => res.json())
       .then((response) =>
-        this.setState({ data: response }, () =>
-          navigation.navigate("MatchingScreen", this.state.data)
+        this.setState({ data: response }, () =>{
+          AsyncStorage.setItem('currentAddress',this.state.address);
+          AsyncStorage.setItem('currentTime',this.state.formattedDate + ' ' + this.state.formattedTime);
+          navigation.navigate("MatchingScreen", this.state.data);
+        }
         )
       )
       .catch((error) => console.log(error));
   }
 
+  searchLocation = () => {
+    console.log('request map api');
+    const requestUrl = "http://www.mapquestapi.com/geocoding/v1/address?key=5m5I0ALgUcKZC5q6b1j7DPjaO2R4IhMF&location="+this.state.address;
+    console.log(requestUrl);
+    fetch(
+      requestUrl
+    )
+      .then((res) => res.json())
+      .then((response) =>
+
+        this.setState({
+         region: {
+          latitude: response.results[0].locations[0].latLng.lat,
+        longitude: response.results[0].locations[0].latLng.lng,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+        },
+        forceRefresh: Math.floor(Math.random() * 100),
+        markers: [
+          {
+            coordinate: { 
+              latitude: response.results[0].locations[0].latLng.lat,
+              longitude: response.results[0].locations[0].latLng.lng 
+            },
+            key: id++,
+          },
+        ]
+      })
+        
+      )
+      .catch((error) => console.log(error));
+
+
+  };
+
+  getAddress = (lat,long) => {
+    console.log('request map api');
+    
+    const requestUrl = "http://www.mapquestapi.com/geocoding/v1/reverse?key=5m5I0ALgUcKZC5q6b1j7DPjaO2R4IhMF"+
+    "&location="+lat+","+long+
+    "&includeRoadMetadata=true&includeNearestIntersection=true";
+    console.log(requestUrl);
+    fetch(
+      requestUrl
+    )
+      .then((res) => res.json())
+      .then((response) =>
+        this.setState({
+          address:response.results[0].locations[0].street+', '+
+          response.results[0].locations[0].adminArea5+', '+
+          response.results[0].locations[0].adminArea1,
+          region: {
+            latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+          }}              
+      ))
+      .catch((error) => console.log(error));
+
+
+  };
+
+  handleAddressChange = (val) => {
+    this.setState({address:val});
+  };
+
+
   renderView = () => {
     const { navigation } = this.props;
+    
     return (
       <View style={styles.container1}>
         <View style={styles.header}>
@@ -125,12 +200,8 @@ export default class MapScreen extends React.Component {
         <View style={styles.container21}>
           <MapView
             style={styles.map}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
+            region={this.state.region}
+            key = {this.state.forceRefresh}
             onPress={(e) => this.onMapPress(e)}
           >
             {this.state.markers.map((marker) => (
@@ -141,23 +212,29 @@ export default class MapScreen extends React.Component {
         <View style={styles.container22}>
           <View style={styles.container221}>
             <Block card style={[styles.products, styles.shadow]}>
+            <TouchableOpacity onPress={this.searchLocation}>
+              <FontAwesome name="location-arrow" color="#96d459" size={20} />
+            </TouchableOpacity>
               <TextInput
                 style={styles.text_address}
-                placeholder="497 Evergreen Rd. Roseville"
-                placeholderTextColor="#77AA46"
+                placeholder="Input your location"
+                onChangeText={(val) => this.handleAddressChange(val)}
+                onSubmitEditing={this.searchLocation}
+                value={this.state.address}
               />
             </Block>
           </View>
           <View style={styles.container221}>
             <Block card style={[styles.products, styles.shadow]}>
               <Text>
-                <TouchableOpacity onPress={showTimepicker}>
+                <TouchableOpacity onPress={showTimepicker} style={{flexDirection:'row'}}>
+                <FontAwesome name="clock-o" color="#000" size={20} />
                   <Text style={styles.text_time}>
-                    {this.state.formattedTime}{" "}
+                    {this.state.formattedTime}{"   "}
                   </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={showDatepicker}>
+                <TouchableOpacity onPress={showDatepicker} style={{flexDirection:'row'}}>
                   <Text style={styles.text_time}>
                     {this.state.formattedDate}
                   </Text>
@@ -216,6 +293,7 @@ export default class MapScreen extends React.Component {
   };
 
   onMapPress = (e) => {
+    this.getAddress(e.nativeEvent.coordinate.latitude, e.nativeEvent.coordinate.longitude);
     this.setState({
       markers: [
         {
@@ -250,12 +328,14 @@ const styles = StyleSheet.create({
 
   products: {
     flex: 1,
+    flexDirection: "row",
     backgroundColor: theme.COLORS.WHITE,
     marginVertical: theme.SIZES.BASE,
     width: "90%",
     borderWidth: 0,
     minHeight: "25%",
-    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 20
   },
 
   shadow: {
