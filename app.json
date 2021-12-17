@@ -30,7 +30,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "icon": "./assets/logo/playstore.png",
-      "versionCode": 3,
+      "versionCode": 5,
       "package": "com.debugentity.choresmanager"
     },
     "web": {

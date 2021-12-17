@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   TextInput,
   Modal,
-  Platform
+  Platform,
+  Alert
 } from "react-native";
 
 import { Button, Block, Text, theme } from "galio-framework";
@@ -217,7 +218,7 @@ export default class MapScreen extends React.Component {
             </TouchableOpacity>
               <TextInput
                 style={styles.text_address}
-                placeholder="Input your location"
+                placeholder="Input your location "
                 onChangeText={(val) => this.handleAddressChange(val)}
                 onSubmitEditing={this.searchLocation}
                 value={this.state.address}
@@ -282,7 +283,21 @@ export default class MapScreen extends React.Component {
           <View style={styles.container221}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => this.postMatching()}
+              onPress={() => {
+                if (this.state.address=="") {
+                  Alert.alert(
+                    ' ',
+                    'PLEASE CHOOSE YOUR LOCATION!',
+                    [
+                      {
+                        text: 'OK', onPress: () => {
+                        }
+                      },
+                    ],
+                    { cancelable: false },
+                  )
+                } else 
+                {this.postMatching()}}}
             >
               <Text style={styles.text_button}>CONFIRM</Text>
             </TouchableOpacity>
@@ -335,7 +350,8 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     minHeight: "25%",
     alignItems: "center",
-    paddingLeft: 20
+    paddingLeft: 20,
+    paddingRight:5
   },
 
   shadow: {

@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     color: '#77AA46',
     fontWeight: 'bold',
     left: 10,
+    fontSize: 18
   },
 
   shadow: {

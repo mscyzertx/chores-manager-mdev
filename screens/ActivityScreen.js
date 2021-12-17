@@ -132,10 +132,12 @@ const styles = StyleSheet.create({
   text_style: {
     color: "#5db84d",
     fontWeight: "bold",
+    fontSize: 16
   },
 
   text_style1: {
     color: "grey",
+    fontSize: 16
   },
 
   shadow: {
