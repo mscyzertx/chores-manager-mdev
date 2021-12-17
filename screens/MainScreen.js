@@ -30,7 +30,10 @@ const MainScreen = () => {
       tabBarOptions={{
         activeTintColor: 'green',
         inactiveTintColor: '#666666',
+        
       }}
+
+      
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Activity" component={ActivityScreen} />
